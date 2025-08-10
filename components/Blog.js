@@ -22,7 +22,7 @@ export function Blog({ id, title, text, deleteBlog }) {
                     <Grid flexGrow={1}>
                         <Typography variant="h4">
                             <Tooltip title="View More" placement="top" arrow>
-                                <span onClick={() => router.push(`/view/${id}`)} style={{ cursor: "pointer" }}>
+                                <span onClick={() => router.push(`/view?id=${id}`)} style={{ cursor: "pointer" }}>
                                     {title}
                                 </span>
                             </Tooltip>
@@ -32,7 +32,7 @@ export function Blog({ id, title, text, deleteBlog }) {
                     {/* Edit Button */}
                     <Grid>
                         <Tooltip title="Edit Blog" placement="top" arrow>
-                            <IconButton onClick={() => router.push(`/edit/${id}`)} color="primary" aria-label="Edit Blog">
+                            <IconButton onClick={() => router.push(`/edit?id=${id}`)} color="primary" aria-label="Edit Blog">
                                 <Edit />
                             </IconButton>
                         </Tooltip>

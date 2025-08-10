@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, ButtonGroup, Container, Grid, IconButton, InputAdornment, TextField, Tooltip, Typography } from "@mui/material";
+import { Button, ButtonGroup, CircularProgress, Container, Grid, IconButton, InputAdornment, TextField, Tooltip, Typography } from "@mui/material";
 import { Add, Clear, Search } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,8 @@ import { Blog } from "@/components/Blog";
 
 export default function Home() {
   const [query, setQuery] = useState("");
-  const [blogs, setBlogs] = useState([]);
-  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  const [blogs, setBlogs] = useState();
+  const [filteredBlogs, setFilteredBlogs] = useState();
 
   const router = useRouter();
 
@@ -21,7 +21,9 @@ export default function Home() {
   // Updates filtered blogs and local storage when blogs useState is changed
   useEffect(() => {
     setFilteredBlogs(blogs);
-    window.localStorage.setItem("blogs", JSON.stringify(blogs));
+
+    if (blogs !== undefined)
+      window.localStorage.setItem("blogs", JSON.stringify(blogs));
   }, [blogs]);
 
   // Filters the blogs based off the query
@@ -106,11 +108,15 @@ export default function Home() {
 
         {/* Blogs */}
         <Grid container spacing={2}>
-          {filteredBlogs.map((blog) => (
-            <Grid key={`blog-${blog.id}`} size={{ xs: 12, md: 4 }}>
-              <Blog {...blog} deleteBlog={deleteBlog} />
-            </Grid>
-          ))}
+          {filteredBlogs ? (
+            filteredBlogs.map((blog) => (
+              <Grid key={`blog-${blog.id}`} size={{ xs: 12, md: 4 }}>
+                <Blog {...blog} deleteBlog={deleteBlog} />
+              </Grid>
+            ))
+          ) : (
+            <CircularProgress size={100} sx={{ mx: "auto" }} />
+          )}
         </Grid>
       </Grid>
     </Container>
