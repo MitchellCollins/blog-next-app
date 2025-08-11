@@ -42,7 +42,7 @@ export function Workshop({ id, handleSubmit, handleCancel }) {
                     minRows={3}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    style={{ width: "100%", resize: "vertical" }}
+                    style={{ width: "100%", resize: "vertical", color: "#fff", backgroundColor: "#000842" }}
                 />
             </Grid>
 
