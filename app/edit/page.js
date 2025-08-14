@@ -1,10 +1,11 @@
 "use client"
 
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { CircularProgress, Container, Grid, Paper, Typography } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { Workshop } from "@/components/Workshop";
 
-export default function Edit() {
+function Edit() {
     const router = useRouter();
     const params = useSearchParams();
     const id = parseInt(params.get("id"));
@@ -47,5 +48,13 @@ export default function Edit() {
                 </Grid>
             </Paper>
         </Container>
+    );
+}
+
+export default function Page() {
+    return (
+        <Suspense fallback={<CircularProgress />}>
+            <Edit />
+        </Suspense>
     );
 }

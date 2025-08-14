@@ -1,11 +1,11 @@
 "use client"
 
 import { Delete, Edit, West } from "@mui/icons-material";
-import { Button, Container, Grid, IconButton, Paper, Tooltip, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Grid, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-export default function View() {
+function View() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     
@@ -81,5 +81,13 @@ export default function View() {
                 </Grid>
             </Paper>
         </Container>
+    );
+}
+
+export default function Page() {
+    return (
+        <Suspense fallback={<CircularProgress />}>
+            <View />
+        </Suspense>
     );
 }
